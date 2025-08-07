@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Layout from "@/components/Layout";
 import { getPersonasByPrisonerId } from "@/services/personaService";
 import { PersonaDto } from '@/types/persona';
-import PersonaDetail from "@/components/persona/PersonaDetail";
+import PersonaDetail from '@/components/persona/PersonaDetail';
 
 const prisoners = [
     { id: 1, name: '이상', name_en: 'Yisang', imageUrl: 'https://gesellschaft.s3.ap-northeast-2.amazonaws.com/character/gallery/title/1.png' },

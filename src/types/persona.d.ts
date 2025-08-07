@@ -1,5 +1,5 @@
 export type GradeType = 'ONE' | 'TWO' | 'THREE';
-export type ResistanceType = 'NORMAL' | 'WEAK' | 'FATAL';
+export type ResistanceType = 'NORMAL' | 'WEAK' | 'FATAL' | 'RESIST';
 export type SeasonType = 'NORMAL' | 'SEASON_NORMAL' | 'SEASON_EVENT' | 'WALPURGISNACHT';
 export type MainAffiliationCategory = 'ASSOCIATION' | 'FINGER' | 'NONE';
 export type SkillAttributeType = 'WRATH' | 'LUST' | 'SLOTH' | 'GREED' | 'PRIDE' | 'ENVY' | 'GLOOM' | 'NONE';
@@ -67,6 +67,14 @@ export interface PassiveInfoDto {
     supportPassiveActivationCount: number;
 }
 
+export interface SkillEffectDto {
+    originalText: string;
+}
+
+export interface SkillCoinEffectDto {
+    originalText: string;
+}
+
 export interface SkillStatsBySyncDto {
     syncLevel: SyncLevel;
     basePower: number;
@@ -75,6 +83,8 @@ export interface SkillStatsBySyncDto {
     weight: number;
     level: number;
     skillImage: string;
+    skillEffects: SkillEffectDto[];
+    skillCoinEffects: SkillCoinEffectDto[];
 }
 
 export interface SkillDto {

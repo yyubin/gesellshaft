@@ -6,14 +6,17 @@ import {
     defenseTypeImages,
     skillAttributeImages,
     coinImages,
-    skillBorders
 } from '@/utils/imageUtils';
 
 import {
     SkillDto,
     SkillStatsBySyncDto,
-    SyncLevel
+    SyncLevel,
+    SkillEffectDto,
+    SkillCoinEffectDto,
 } from '@/types/persona';
+
+import SkillDescription from '@/components/persona/SkillDescription';
 
 type Props = {
     skill: SkillDto;
@@ -29,29 +32,19 @@ const SkillCard: React.FC<Props> = ({ skill, syncLevel }) => {
             ? attackTypeImages[skill.attackType]
             : defenseTypeImages[skill.defenseType];
 
-    const borderKey = `${skill.skillAttribute.toLowerCase()}_${skill.skillQuantity}`;
-    const borderImg = skillBorders[borderKey];
+    if (!stats) {
+        return null;
+    }
+
+    // DTO에서 originalText만 추출
+    const skillEffectTexts = stats.skillEffects?.map(effect => effect.originalText);
+    const skillCoinEffectTexts = stats.skillCoinEffects?.map(effect => effect.originalText);
 
     /** ────────── 렌더링 ────────── */
     return (
-        <div className="relative flex items-center p-3 bg-gray-700 rounded-lg w-[280px]">
-            {/* ------- SVG 외곽선 ------- */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 540 100">
-                <polyline points="170,50 490,50" stroke-width="5" stroke="#19839d" />
-            </svg>
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 540 100">
-                <polyline points="20,120 450,120" stroke-width="5" stroke="#19839d" />
-            </svg>
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 540 100">
-                <polyline points="450,120 520,0" stroke-width="5" stroke="#19839d" />
-            </svg>
-
+        <div className="relative flex items-center p-3 bg-gray-700 rounded-lg w-[540px]">
             {/* ------- 스킬 아이콘 영역 ------- */}
-            <div className="relative shrink-0 pb-4">
-                {/* 테두리 */}
-                {borderImg && (
-                    <img src={borderImg} alt="border" className="absolute inset-0 w-[64px] h-[64px]" />
-                )}
+            <div className="relative shrink-0">
                 {/* 스킬 이미지 */}
                 {stats?.skillImage && (
                     <img
@@ -82,9 +75,13 @@ const SkillCard: React.FC<Props> = ({ skill, syncLevel }) => {
 
                 {stats && (
                     <p className="text-sm text-gray-300 mt-1">
-                        위력&nbsp;{stats.basePower}+{stats.coinPower} &nbsp;|&nbsp; 코인&nbsp;{stats.coinCount}
+                        위력&nbsp;{stats.basePower}+{stats.coinPower} &nbsp;|&nbsp; 최대 위력&nbsp;{stats.coinCount * stats.coinPower + stats.basePower}
                     </p>
                 )}
+            </div>
+            <div className="ml-6 flex flex-col gap-2">
+                <SkillDescription texts={skillEffectTexts} title="스킬 효과" />
+                <SkillDescription texts={skillCoinEffectTexts} title="코인 효과" />
             </div>
         </div>
     );
