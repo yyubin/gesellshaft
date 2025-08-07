@@ -74,6 +74,7 @@ export interface SkillStatsBySyncDto {
     coinCount: number;
     weight: number;
     level: number;
+    skillImage: string;
 }
 
 export interface SkillDto {

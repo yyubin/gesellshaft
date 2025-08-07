@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Layout from "@/components/Layout";
 import { getPersonasByPrisonerId } from "@/services/personaService";
 import { PersonaDto } from '@/types/persona';
-import PersonaDetail from "@/components/PersonaDetail";
+import PersonaDetail from "@/components/persona/PersonaDetail";
 
 const prisoners = [
     { id: 1, name: '이상', name_en: 'Yisang', imageUrl: 'https://gesellschaft.s3.ap-northeast-2.amazonaws.com/character/gallery/title/1.png' },
@@ -97,7 +97,7 @@ export default function PersonaPage() {
                                                             ${selectedPersona?.id === persona.id ? 'ring-4 ring-blue-500' : ''}`}
                                                 onClick={() => setSelectedPersona(persona)}
                                             >
-                                                {/* <img src={persona.imageUrl} alt={persona.name} className="w-full h-full object-cover" /> */}
+                                                <img src={persona.imageInfo.imageUrlA} alt={persona.name} className="w-full h-full object-cover" />
                                                 <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent text-white text-xs font-semibold">
                                                     {persona.name}
                                                 </div>
