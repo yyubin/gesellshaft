@@ -5,6 +5,13 @@ export const attackTypeImages: Record<string, string> = {
     BLUNT: 'https://gesellschaft.s3.ap-northeast-2.amazonaws.com/icon/type/type_blunt.webp',
 };
 
+export const statusImages: Record<string, string> = {
+    GUARD: 'https://gesellschaft.s3.ap-northeast-2.amazonaws.com/icon/status/guard_icon.png',
+    SPEED: 'https://gesellschaft.s3.ap-northeast-2.amazonaws.com/icon/status/speed_icon.png',
+    MENTAL: 'https://gesellschaft.s3.ap-northeast-2.amazonaws.com/icon/status/metality_icon.png',
+    HEALTH: 'https://gesellschaft.s3.ap-northeast-2.amazonaws.com/icon/status/health_icon.png'
+}
+
 export const defenseTypeImages: Record<string, string> = {
     COUNTER: 'https://gesellschaft.s3.ap-northeast-2.amazonaws.com/icon/type/type_slash.webp',
     EVADE: 'https://gesellschaft.s3.ap-northeast-2.amazonaws.com/icon/type/type_pierce.webp',

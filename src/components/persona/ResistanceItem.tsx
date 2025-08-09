@@ -14,12 +14,12 @@ interface ResistanceItemProps {
 
 const ResistanceItem: React.FC<ResistanceItemProps> = ({ attackType, resistanceType, imageSrc }) => {
     return (
-        <Flex direction="column" align="center" gap="xs">
-            <img src={imageSrc} alt={attackType} className="w-10 h-10 object-contain" />
-            <Text size="m" color="dimmed" fw={700}>
+        <div className="flex flex-col items-center justify-center">
+            <img src={imageSrc} alt={attackType} className="w-8 h-8 object-contain" />
+            <Text size="m" color="dimmed" fw={500}>
                 {resistanceLabels[resistanceType]}
             </Text>
-        </Flex>
+        </div>
     );
 };
 

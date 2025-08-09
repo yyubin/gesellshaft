@@ -9,6 +9,8 @@ export type AttackType = 'SLASH' | 'PIERCE' | 'BLUNT';
 export type DefenseType = 'COUNTER' | 'EVADE' | 'GUARD';
 export type SyncLevel = 'SYNC_3' | 'SYNC_4';
 export type SkillKeywordType = 'BURN' | 'BLEED' | 'TREMOR' | 'RUPTURE' | 'SINKING' | 'BREATH' | 'CHARGE' | 'NONE';
+export type PersonaImageType = 'A' | 'B' | 'AC' | 'BC' | 'SD';
+export type PassiveKind = 'NORMAL' | 'SUPPORT';
 
 export interface PrisonerDto {
     id: number;
@@ -27,12 +29,11 @@ export interface SpeedInfoDto {
     maxSpeed: number;
 }
 
-export interface ImageInfoDto {
-    imageUrlA: string;
-    imageUrlB: string;
-    imageUrlAC: string;
-    imageUrlBC: string;
-    imageUrlSD: string;
+export interface PersonaImageDto {
+    type: PersonaImageType;
+    url: string;
+    priority: number;
+    primary: boolean;
 }
 
 export interface HealthInfoDto {
@@ -54,17 +55,19 @@ export interface SubAffiliationDto {
     mainCategory: MainAffiliationCategory;
 }
 
-export interface PassiveInfoDto {
-    normalPassiveName: string;
-    normalPassiveAttribute: SkillAttributeType;
-    normalPassiveInvocationType: InvocationType;
-    normalPassiveActivationAttribute: SkillAttributeType;
-    normalPassiveActivationCount: number;
-    supportPassiveName: string;
-    supportPassiveAttribute: SkillAttributeType;
-    supportPassiveInvocationType: InvocationType;
-    supportPassiveActivationAttribute: SkillAttributeType;
-    supportPassiveActivationCount: number;
+export interface PassiveActivationRequirementDto {
+    attribute: SkillAttributeType;
+    invocationType: InvocationType;
+    count: number;
+}
+
+export interface PersonaPassiveDto {
+    id: number;
+    kind: PassiveKind;
+    name: string;
+    activation?: PassiveActivationRequirementDto | null;
+    originalText?: string | null;
+    syncLevel?: SyncLevel | 'SYNC_3';
 }
 
 export interface SkillEffectDto {
@@ -82,7 +85,6 @@ export interface SkillStatsBySyncDto {
     coinCount: number;
     weight: number;
     level: number;
-    skillImage: string;
     skillEffects: SkillEffectDto[];
     skillCoinEffects: SkillCoinEffectDto[];
 }
@@ -96,6 +98,7 @@ export interface SkillDto {
     attackType: AttackType;
     defenseType: DefenseType;
     personaId: number;
+    skillImage: string;
     statsBySync: SkillStatsBySyncDto[];
     keyword: SkillKeywordType;
 }
@@ -113,8 +116,8 @@ export interface PersonaDto {
     defenseLevel: number;
     mentality: number;
     affiliation: SubAffiliationDto;
-    passiveInfo: PassiveInfoDto;
-    imageInfo: ImageInfoDto;
+    passives: PersonaPassiveDto[];
+    images: PersonaImageDto[];
     skills: SkillDto[];
     releaseDate: string;
 }

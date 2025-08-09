@@ -58,15 +58,15 @@ const HealthBar: React.FC<HealthBarProps> = ({ level, healthInfo }) => {
             <Group mt="md">
                 <Text size="xs" color="dimmed" className="flex items-center">
                     <span className="w-2 h-2 rounded-full bg-yellow-400 mr-1" />
-                    흐트러짐 1 ({healthInfo.disturbed1}) → 약 {disturbed1}
+                    {disturbed1} ({healthInfo.disturbed1}%)
                 </Text>
                 <Text size="xs" color="dimmed" className="flex items-center">
                     <span className="w-2 h-2 rounded-full bg-red-500 mr-1" />
-                    흐트러짐 2 ({healthInfo.disturbed2}) → 약 {disturbed2}
+                    {disturbed2} ({healthInfo.disturbed2}%)
                 </Text>
                 <Text size="xs" color="dimmed" className="flex items-center">
                     <span className="w-2 h-2 rounded-full bg-red-700 mr-1" />
-                    흐트러짐 3 ({healthInfo.disturbed3}) → 약 {disturbed3}
+                    {disturbed3} ({healthInfo.disturbed3}%)
                 </Text>
             </Group>
 

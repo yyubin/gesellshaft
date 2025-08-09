@@ -1,15 +1,22 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, {useMemo, useState} from 'react';
 import { Modal, Image, Box, Group, Text } from '@mantine/core';
 import { PersonaDto, GradeType } from '@/types/persona';
 import { gradeImages } from '@/utils/imageUtils';
+import StatsSection from './StatsSection';
 
 interface ImageToggleButtonProps {
     label: string;
     imageUrl: string | null;
     currentImageUrl: string | undefined;
     onClick: (url: string) => void;
+}
+
+interface ImageSectionProps {
+    persona: PersonaDto;
+    level: number; // ADDED
+    setLevel: (level: number) => void; // ADDED
 }
 
 const ImageToggleButton: React.FC<ImageToggleButtonProps> = ({
@@ -39,10 +46,27 @@ interface ImageSectionProps {
     persona: PersonaDto;
 }
 
-const ImageSection: React.FC<ImageSectionProps> = ({ persona }) => {
-    const [currentImage, setCurrentImage] = useState<string | undefined>(
-        persona?.imageInfo?.imageUrlAC
-    );
+const ImageSection: React.FC<ImageSectionProps> = ({ persona, level, setLevel }) => {
+    const sortedImages = useMemo(() => {
+        const arr = [...(persona.images || [])];
+        arr.sort((a, b) => {
+            if (a.primary && !b.primary) return -1;
+            if (!a.primary && b.primary) return 1;
+            if (a.priority !== b.priority) return a.priority - b.priority;
+            return a.type.localeCompare(b.type);
+        });
+        return arr;
+    }, [persona.images]);
+
+    const defaultImage = useMemo(() => {
+        const primary = sortedImages.find(i => i.primary)?.url;
+        if (primary) return primary;
+        const ac = sortedImages.find(i => i.type === 'AC')?.url;
+        if (ac) return ac;
+        return sortedImages[0]?.url;
+    }, [sortedImages]);
+
+    const [currentImage, setCurrentImage] = useState<string | undefined>(defaultImage);
     const [opened, setOpened] = useState(false);
 
     const gradeSrc = (() => {
@@ -60,8 +84,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({ persona }) => {
 
     return (
         <div className="flex-shrink-0 w-full md:w-1/3 p-4 bg-gray-900 rounded-lg mr-6 mb-6 md:mb-0">
-            {/* ─────────── 썸네일 & 토글 버튼 ─────────── */}
-            {persona.imageInfo && (
+            {sortedImages.length > 0 && (
                 <div className="flex flex-col items-center">
                     {currentImage && (
                         <img
@@ -72,11 +95,15 @@ const ImageSection: React.FC<ImageSectionProps> = ({ persona }) => {
                         />
                     )}
                     <div className="flex flex-wrap justify-center gap-2">
-                        <ImageToggleButton label="AC" imageUrl={persona.imageInfo.imageUrlAC} currentImageUrl={currentImage} onClick={setCurrentImage} />
-                        <ImageToggleButton label="A"  imageUrl={persona.imageInfo.imageUrlA}  currentImageUrl={currentImage} onClick={setCurrentImage} />
-                        <ImageToggleButton label="B"  imageUrl={persona.imageInfo.imageUrlB}  currentImageUrl={currentImage} onClick={setCurrentImage} />
-                        <ImageToggleButton label="BC" imageUrl={persona.imageInfo.imageUrlBC} currentImageUrl={currentImage} onClick={setCurrentImage} />
-                        <ImageToggleButton label="SD" imageUrl={persona.imageInfo.imageUrlSD} currentImageUrl={currentImage} onClick={setCurrentImage} />
+                        {sortedImages.map(img => (
+                            <ImageToggleButton
+                                key={`${img.type}-${img.priority}-${img.url}`}
+                                label={img.type}
+                                imageUrl={img.url}
+                                currentImageUrl={currentImage}
+                                onClick={setCurrentImage}
+                            />
+                        ))}
                     </div>
                 </div>
             )}
@@ -87,6 +114,8 @@ const ImageSection: React.FC<ImageSectionProps> = ({ persona }) => {
                 <h2 className="text-3xl font-bold">{persona.name}</h2>
                 <p className="text-gray-400">소속 {persona.affiliation?.name}</p>
             </div>
+
+            <StatsSection persona={persona} level={level} setLevel={setLevel} />
 
             {/* ─────────────── 확대 모달 ─────────────── */}
             <Modal
