@@ -16,7 +16,7 @@ const ResistanceItem: React.FC<ResistanceItemProps> = ({ attackType, resistanceT
     return (
         <div className="flex flex-col items-center justify-center">
             <img src={imageSrc} alt={attackType} className="w-8 h-8 object-contain" />
-            <Text size="m" color="dimmed" fw={500}>
+            <Text size="m" color="dark:dimmed" fw={500}>
                 {resistanceLabels[resistanceType]}
             </Text>
         </div>

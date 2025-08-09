@@ -20,7 +20,7 @@ export default function PassiveCard({ passive }: Props) {
     const attrLabel = attributeLabels[passive.activation?.attribute ?? 'NONE'];
 
     return (
-        <Box className="bg-gray-700 rounded-lg p-4">
+        <Box className="bg-gray-300 dark:bg-gray-700 rounded-lg p-4">
             <Group justify="space-between" align="center" mb="xs">
                 <Group gap="sm" align="center">
                     <Image src={icon} alt={`${attr}`} w={28} h={28} radius="sm" />
@@ -39,9 +39,7 @@ export default function PassiveCard({ passive }: Props) {
             </Group>
 
             {passive.originalText && (
-                <Text c="gray.2" fz="sm" mt="xs">
-                    {passive.originalText}
-                </Text>
+                <div>{passive.originalText}</div>
             )}
         </Box>
     );

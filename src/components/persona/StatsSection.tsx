@@ -22,8 +22,8 @@ const StatsSection: React.FC<StatsSectionProps> = ({ persona, level, setLevel })
 
     return (
         <div className="space-y-6 mt-6">
-            <Box className="bg-gray-700 p-4 rounded-lg pb-6">
-                <Text size="sm" color="dimmed" mb="xs">레벨 조절</Text>
+            <Box className="bg-gray-400 dark:bg-gray-700 p-4 rounded-lg pb-6">
+                <div className="dark:text-gray-400 pb-2">레벨 조절</div>
                 <Box className="pl-2 pr-2">
                     <Slider
                         value={level}
@@ -39,16 +39,15 @@ const StatsSection: React.FC<StatsSectionProps> = ({ persona, level, setLevel })
             </Box>
 
             {persona.healthInfo && (
-                <div className="bg-gray-700 p-4 rounded-lg">
+                <div className="bg-gray-400 dark:bg-gray-700 p-4 rounded-lg">
                     <h4 className="font-bold text-lg mb-2">체력 정보</h4>
                     <HealthBar level={level} healthInfo={persona.healthInfo} />
                 </div>
             )}
 
             {/* --- CHANGED START --- */}
-            <div className="bg-gray-700 p-4 rounded-lg">
+            <div className="bg-gray-400 dark:bg-gray-700 p-4 rounded-lg">
                 <h4 className="font-bold text-lg">스테이터스</h4>
-                {/* 6개의 아이템을 하나의 grid 컨테이너로 묶습니다. */}
                 <div className="grid grid-cols-3 gap-y-4 gap-x-2 mt-3">
                     {/* 1행 */}
                     <StatusItem

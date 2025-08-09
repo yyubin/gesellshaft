@@ -17,8 +17,8 @@ export default function StatusItem({ iconSrc, value, alt, subLabel }: Props) {
                 height={20}
                 className="block"
             />
-            <div className="text-gray-100 text-medium font-semibold mt-1">{value}</div>
-            {subLabel && <div className="text-gray-400 text-xs mt-0.5">{subLabel}</div>}
+            <div className="dark:text-gray-100 text-medium font-semibold mt-1">{value}</div>
+            {subLabel && <div className="dark:text-gray-400 text-xs mt-0.5">{subLabel}</div>}
         </div>
     );
 }

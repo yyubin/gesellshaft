@@ -25,33 +25,45 @@ const PersonaDetail: React.FC<PersonaDetailProps> = ({ persona }) => {
     })
 
     if (!persona) {
-        return <p className="text-gray-400">인격 정보를 불러오는 데 실패했습니다.</p>;
+        // 다크 모드 지원: 텍스트 색상 변경
+        return <p className="text-gray-500 dark:text-gray-400">인격 정보를 불러오는 데 실패했습니다.</p>;
     }
 
     return (
-        <div className="bg-gray-800 rounded-lg shadow-xl p-6 flex flex-col md:flex-row">
-            {/* 왼쪽: 이미지 섹션 */}
-            {/* CHANGED: level과 setLevel을 props로 전달 */}
+        // 다크 모드 지원: 배경색 변경
+        <div className="bg-gray-200 dark:bg-gray-800 rounded-lg shadow-xl p-4 md:p-6 flex flex-col md:flex-row">
             <ImageSection persona={persona} level={level} setLevel={setLevel} />
 
             {/* 오른쪽: 탭 콘텐츠 섹션 */}
-            <div className="flex-1">
+            <div className="flex-1 mt-6 md:mt-0">
                 {/* 탭 네비게이션 */}
-                <div className="flex border-b border-gray-700 mb-6">
+                <div className="flex border-b border-gray-500 dark:border-gray-100 mb-6">
                     <button
-                        className={`px-4 py-2 font-semibold ${activeTab === 'skills' ? 'text-white border-b-2 border-blue-500' : 'text-gray-500'}`}
+                        className={`px-4 py-2 font-semibold transition-colors duration-200 ${
+                            activeTab === 'skills'
+                                ? 'text-blue-600 dark:text-white border-b-2 border-blue-500'
+                                : 'text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white'
+                        }`}
                         onClick={() => setActiveTab('skills')}
                     >
                         스킬
                     </button>
                     <button
-                        className={`px-4 py-2 font-semibold ${activeTab === 'passives' ? 'text-white border-b-2 border-blue-500' : 'text-gray-500'}`}
+                        className={`px-4 py-2 font-semibold transition-colors duration-200 ${
+                            activeTab === 'passives'
+                                ? 'text-blue-600 dark:text-white border-b-2 border-blue-500'
+                                : 'text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white'
+                        }`}
                         onClick={() => setActiveTab('passives')}
                     >
                         패시브
                     </button>
                     <button
-                        className={`px-4 py-2 font-semibold ${activeTab === 'mentalities' ? 'text-white border-b-2 border-blue-500' : 'text-gray-500'}`}
+                        className={`px-4 py-2 font-semibold transition-colors duration-200 ${
+                            activeTab === 'mentalities'
+                                ? 'text-blue-600 dark:text-white border-b-2 border-blue-500'
+                                : 'text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white'
+                        }`}
                         onClick={() => setActiveTab('mentalities')}
                     >
                         정신력
@@ -66,12 +78,15 @@ const PersonaDetail: React.FC<PersonaDetailProps> = ({ persona }) => {
                         onClick={syncSwitchToggle}
                         onLabel="동기화 4"
                         offLabel="동기화 3"
-                    >
-                    </Switch>
+                    />
                 </div>
 
                 {/* 탭 콘텐츠 */}
                 <div className="tab-content">
+                    {/*
+                      SkillList, PassiveList와 같은 하위 컴포넌트들도
+                      내부적으로 다크모드를 지원하도록 스타일 수정이 필요할 수 있습니다.
+                    */}
                     {activeTab === 'skills' && (
                         <div className="space-y-6">
                             <SkillList skills={persona.skills} syncLevel={syncLevel} />
@@ -85,10 +100,10 @@ const PersonaDetail: React.FC<PersonaDetailProps> = ({ persona }) => {
                     )}
 
                     {activeTab === 'mentalities' && (
-                        <div className="space-y-6"></div>
+                        <div className="space-y-6">
+                            {/* 정신력 관련 콘텐츠 */}
+                        </div>
                     )}
-
-                    {/* REMOVED: 'stats' 탭 콘텐츠 전체 제거 */}
                 </div>
             </div>
         </div>

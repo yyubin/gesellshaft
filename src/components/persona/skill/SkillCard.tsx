@@ -16,7 +16,7 @@ export default function SkillCard({ skill, syncLevel }: Props) {
     if (!stats) return null;
 
     return (
-        <div className="relative flex items-center p-3 bg-gray-700 rounded-lg">
+        <div className="relative flex items-center p-3  bg-gray-300 dark:bg-gray-700 rounded-lg">
             <SkillIcon image={skill.skillImage} coinCount={stats.coinCount} name={skill.name} />
             <div className="ml-4 flex flex-col">
                 <SkillHeader skill={skill} />

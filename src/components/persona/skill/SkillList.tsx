@@ -10,7 +10,7 @@ type Props = {
 
 export default function SkillList({ skills, syncLevel }: Props) {
     if (!skills || skills.length === 0) {
-        return <p className="text-gray-400">스킬 정보가 없습니다.</p>;
+        return <p className="dark:text-gray-400">스킬 정보가 없습니다.</p>;
     }
     return (
         <div className="space-y-6">

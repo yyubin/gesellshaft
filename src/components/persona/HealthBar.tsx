@@ -21,10 +21,10 @@ const HealthBar: React.FC<HealthBarProps> = ({ level, healthInfo }) => {
     return (
         <Box className="w-full">
             <Group mb="xs">
-                <Text size="sm" color="dimmed">
+                <Text size="sm" color="dark:dimmed">
                     최대 체력: {maxHealth.toFixed(0)}
                 </Text>
-                <Text size="sm" color="dimmed">
+                <Text size="sm" color="dark:dimmed">
                     레벨: {level}
                 </Text>
             </Group>
@@ -56,24 +56,24 @@ const HealthBar: React.FC<HealthBarProps> = ({ level, healthInfo }) => {
             </div>
 
             <Group mt="md">
-                <Text size="xs" color="dimmed" className="flex items-center">
+                <Text size="xs" color="dark:dimmed" className="flex items-center">
                     <span className="w-2 h-2 rounded-full bg-yellow-400 mr-1" />
                     {disturbed1} ({healthInfo.disturbed1}%)
                 </Text>
-                <Text size="xs" color="dimmed" className="flex items-center">
+                <Text size="xs" color="dark:dimmed" className="flex items-center">
                     <span className="w-2 h-2 rounded-full bg-red-500 mr-1" />
                     {disturbed2} ({healthInfo.disturbed2}%)
                 </Text>
-                <Text size="xs" color="dimmed" className="flex items-center">
+                <Text size="xs" color="dakr:dimmed" className="flex items-center">
                     <span className="w-2 h-2 rounded-full bg-red-700 mr-1" />
                     {disturbed3} ({healthInfo.disturbed3}%)
                 </Text>
             </Group>
 
             {/* ──────────────── 안내 문구 ──────────────── */}
-            <Text size="xs" mt="xs" c="dimmed">
+            <div className="mt-2 text-xs dark:text-gray-400" style={{ whiteSpace: 'pre-line' }}>
                 ※ 체력 값은 소수점 이하를 반올림했기 때문에 실제 계산값과 최대 ±0.5 차이가 있을 수 있습니다.
-            </Text>
+            </div>
         </Box>
     );
 };

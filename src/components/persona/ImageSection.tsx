@@ -83,7 +83,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({ persona, level, setLevel })
     })();
 
     return (
-        <div className="flex-shrink-0 w-full md:w-1/3 p-4 bg-gray-900 rounded-lg mr-6 mb-6 md:mb-0">
+        <div className="flex-shrink-0 w-full md:w-1/3 p-4 bg-gray-300 dark:bg-gray-900 rounded-lg mr-6 mb-6 md:mb-0">
             {sortedImages.length > 0 && (
                 <div className="flex flex-col items-center">
                     {currentImage && (
@@ -112,7 +112,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({ persona, level, setLevel })
             <div className="mt-6 text-center">
                 {gradeSrc && <img src={gradeSrc} alt={persona.grade} className="w-8 h-12 mx-auto mb-2" />}
                 <h2 className="text-3xl font-bold">{persona.name}</h2>
-                <p className="text-gray-400">소속 {persona.affiliation?.name}</p>
+                <p className="dark:text-gray-400">소속 {persona.affiliation?.name}</p>
             </div>
 
             <StatsSection persona={persona} level={level} setLevel={setLevel} />

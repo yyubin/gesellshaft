@@ -28,9 +28,9 @@ const SkillDescription: React.FC<Props> = ({ texts, title }) => {
     };
 
     return (
-        <div className="p-3 bg-gray-800 rounded-lg">
-            <h5 className="text-sm font-semibold text-gray-200">{title}</h5>
-            <ul className="list-disc list-inside mt-1 space-y-1 text-sm text-gray-400">
+        <div className="p-3 dark:bg-gray-800 rounded-lg">
+            <h5 className="text-sm font-semibold dark:text-gray-200">{title}</h5>
+            <ul className="list-disc list-inside mt-1 space-y-1 text-sm dark:text-gray-400">
                 {texts.map((text, index) => (
                     <li key={index}>{renderTextWithHighlights(text)}</li>
                 ))}

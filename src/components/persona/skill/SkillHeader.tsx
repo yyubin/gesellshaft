@@ -16,7 +16,7 @@ export default function SkillHeader({ skill }: Props) {
 
     return (
         <div className="flex items-center gap-1">
-            <h4 className="text-base font-bold text-white">{skill.name}</h4>
+            <h4 className="text-base font-bold text-gray-600 dark:text-white">{skill.name}</h4>
             <img src={attributeImg} className="w-5 h-5" alt={skill.skillAttribute} />
             {typeImg && (
                 <img

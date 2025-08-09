@@ -9,7 +9,7 @@ type Props = {
 export default function SkillStatsRow({ stats }: Props) {
     const maxPower = stats.basePower + stats.coinPower * stats.coinCount;
     return (
-        <p className="text-sm text-gray-300 mt-1">
+        <p className="text-sm dark:text-gray-300 mt-1">
             위력 {stats.basePower}+{stats.coinPower} &nbsp;|&nbsp; 최대 위력 {maxPower}
         </p>
     );
